@@ -59,18 +59,18 @@ object DataFrame {
                 .substr(1,2))
     df2.show()
 
-    // Write the result in a new CSV file named "commune_et_departement.csv", 
+    // 5) Write the result in a new CSV file named "commune_et_departement.csv", 
     // having for column "Code_commune_INSEE", "Nom_commune", "Code_postal", "Numero_departement", ordered by postal code.
     df2.select("Code_commune_INSEE", "Nom_commune", "Code_postal", "Numero_departement")
       .sort("Code_postal") // .orderBy("Code_postal".desc)
       .write.options("header",true)
       .csv("src/main/resources")
 
-    // Display the communes of the Aisne department.
+    // 6) Display the communes of the Aisne department.
     df2.filter("Numero_departement = 02")
       .show()
  
-    // Which department has the most communes ?
+    // 7) Which department has the most communes ?
     df2.groupBy("Numero_departement")
       .count()
       .show()
