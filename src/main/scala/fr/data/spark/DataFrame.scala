@@ -62,9 +62,11 @@ object DataFrame {
     // 5) Write the result in a new CSV file named "commune_et_departement.csv", 
     // having for column "Code_commune_INSEE", "Nom_commune", "Code_postal", "Numero_departement", ordered by postal code.
     df2.select("Code_commune_INSEE", "Nom_commune", "Code_postal", "Numero_departement")
-      .sort("Code_postal") // .orderBy("Code_postal".desc)
-      .write.options("header",true)
-      .csv("src/main/resources")
+      // .sort("Code_postal") 
+      .orderBy(desc("Code_postal"))
+      .write.option("header",true)
+      .option("delimiter", ";")
+      .csv("src/main/resources/new")
 
     // 6) Display the communes of the Aisne department.
     df2.filter("Numero_departement = 02")
