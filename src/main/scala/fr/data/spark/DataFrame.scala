@@ -18,14 +18,14 @@ object DataFrame {
       .option("inferSchema", "true")
       .csv("src/main/resources/codesPostaux.csv")
 
-    case class Commune(
-      Code_commune_INSEE: String,
-      Nom_commune: String,
-      Code_postal: String,
-      Ligne_5: String,
-      Libellé_d_acheminement: String,
-      coordonnees_gps: String
-    )
+    // case class Commune(
+    //   Code_commune_INSEE: String,
+    //   Nom_commune: String,
+    //   Code_postal: String,
+    //   Ligne_5: String,
+    //   Libellé_d_acheminement: String,
+    //   coordonnees_gps: String
+    // )
 
     // val ds = df.as[Commune]
 
@@ -69,10 +69,11 @@ object DataFrame {
     // 6) Display the communes of the Aisne department.
     df2.filter("Numero_departement = 02")
       .show()
- 
-    // 7) Which department has the most communes ?
+
+    // 7) Which department has the most communes ? 62 : 940
     df2.groupBy("Numero_departement")
       .count()
+      .sort(desc("count"))
       .show()
 
   }
